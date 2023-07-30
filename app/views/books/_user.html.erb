@@ -1,0 +1,39 @@
+<h1>User Info</h1>
+<%= image_tag user.get_profile_image(100,100) %>
+<table>
+<tr>
+<td><p>name</p></td>
+<td><p><%= user.name %></p></td>
+</tr>
+
+<tr>
+<td><p>introduction</p></td>
+<td><p><%= user.introduction %></p></td>
+</tr>
+</table>
+<div class="raw">
+<%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+    <i class="fas fa-user-cog" aria-hidden="true"></i>
+<% end %>
+</div>
+
+<h1>New book</h1>
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: book do |f| %>
+  <h4>title</h4>
+  <%= f.text_field :title %>
+	
+  <h4>opinion</h4>
+  <%= f.text_area :body %>
+	
+  <%= f.submit 'Create Books', class: "btn btn-secondary" %>
+<% end %>
